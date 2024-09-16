@@ -1,0 +1,14 @@
+# docker
+Dockerfile
+
+# git
+.git/
+.gitattributes
+.gitignore
+
+# virtual environment
+env/
+
+# Python caches
+__pycache__/
+app/__pycache__/
