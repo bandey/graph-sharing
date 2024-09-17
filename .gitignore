@@ -6,4 +6,4 @@ env/
 
 # Python caches
 __pycache__/
-app/__pycache__/
+webserver/__pycache__/

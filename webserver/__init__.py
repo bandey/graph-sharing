@@ -7,5 +7,5 @@ app.config.from_object('config.Config')
 
 # init extensions
 
-# import views
+# import router
 from . import router
