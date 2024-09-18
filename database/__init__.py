@@ -7,6 +7,6 @@ def dbConnect(app, uri):
   dbH = PyMongo(app, uri).db
   return dbH
 
-def dbHandler():
+def dbClient():
   global dbH
   return dbH
