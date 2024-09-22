@@ -39,4 +39,4 @@ def route_import():
   binary = file.read()
   stroka = binary.decode()
   flash('Данные из файла успешно импортированы')
-  return render_template('import.html')
+  return render_template('result.html')
