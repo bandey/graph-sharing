@@ -1,4 +1,5 @@
 from database import dbClient
 
 def insert(vertex):
-  dbClient().gs_vertex.insert_one(vertex)
+  result = dbClient().gs_vertex.insert_one(vertex)
+  return result.inserted_id
