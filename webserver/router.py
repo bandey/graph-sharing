@@ -21,3 +21,19 @@ def auth_enter():
 def auth_exit():
   session.pop('visitor', None)  
   return redirect(url_for('auth'))
+
+@app.route('/import', methods=['GET', 'POST'])
+def route_import():
+  if 'visitor' not in session:
+    return redirect(url_for('auth'))
+  if request.method == 'GET':
+    return render_template('import.html')
+  if 'dataFile' not in request.files:
+    return render_template('import.html')
+  file = request.files['dataFile']
+  if file.filename == '':
+    return render_template('import.html')
+  file.seek(0)
+  binary = file.read()
+  stroka = binary.decode()
+  return render_template('hello.html')

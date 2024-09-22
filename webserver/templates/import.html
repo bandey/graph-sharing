@@ -1,0 +1,8 @@
+{% extends 'menu.html' %}
+{% block body %}
+<h1>Импорт нового графа</h1>
+<form id="dataForm" method="post" enctype="multipart/form-data">
+  <p><input type="file" id="dataFile" name="dataFile" accept=".json" required></p>
+  <p><input type="submit" value="Отправить"></p>
+</form>
+{% endblock %}
