@@ -1,10 +1,9 @@
 {% extends 'layout-main.html' %}
 {% block body %}
-<h1>Вход</h1>
-<form method="post" action="/auth/enter">
-  <p><input type="text" name="login" placeholder="email" required autofocus></p>
-  <p><input type="password" name="passw" placeholder="пароль" required></p>
-  <p><input type="submit" value="Войти"></p>
-</form>
-<p>{{ message }}</p>
+  <h1>Вход</h1>
+  <form method="post" action="/auth/enter">
+    <p><input type="text" name="login" placeholder="email" required autofocus></p>
+    <p><input type="password" name="passw" placeholder="пароль" required></p>
+    <p><input type="submit" value="Войти"></p>
+  </form>
 {% endblock %}
