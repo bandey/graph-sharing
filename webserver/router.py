@@ -1,5 +1,6 @@
 from webserver import app
 from flask import request, session, redirect, url_for, flash, render_template
+from actions.import_graph import importGraph
 
 @app.route('/')
 def route_index():
@@ -35,8 +36,6 @@ def route_import():
   if file.filename == '':
     flash('Не выбран файл для импорта')
     return render_template('import.html')
-  file.seek(0)
-  binary = file.read()
-  stroka = binary.decode()
-  flash('Данные из файла успешно импортированы')
+  result = importGraph(file)
+  flash(result)
   return render_template('result.html')
