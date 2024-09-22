@@ -1,5 +1,5 @@
 from webserver import app
-from flask import request, session, redirect, url_for, render_template
+from flask import request, session, redirect, url_for, flash, render_template
 
 @app.route('/')
 def route_index():
@@ -29,11 +29,14 @@ def route_import():
   if request.method == 'GET':
     return render_template('import.html')
   if 'dataFile' not in request.files:
+    flash('Не выбран файл для импорта')
     return render_template('import.html')
   file = request.files['dataFile']
   if file.filename == '':
+    flash('Не выбран файл для импорта')
     return render_template('import.html')
   file.seek(0)
   binary = file.read()
   stroka = binary.decode()
-  return render_template('hello.html')
+  flash('Данные из файла успешно импортированы')
+  return render_template('import.html')

@@ -5,4 +5,11 @@
   <p><input type="file" id="dataFile" name="dataFile" accept=".json" required></p>
   <p><input type="submit" value="Отправить"></p>
 </form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 {% endblock %}
