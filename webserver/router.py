@@ -29,6 +29,9 @@ def route_import():
     return redirect(url_for('route_auth'))
   if request.method == 'GET':
     return render_template('import.html')
+  if 'graphName' not in request.form:
+    flash('Не указано имя графа')
+    return render_template('import.html')
   if 'dataFile' not in request.files:
     flash('Не выбран файл для импорта')
     return render_template('import.html')
@@ -36,6 +39,7 @@ def route_import():
   if file.filename == '':
     flash('Не выбран файл для импорта')
     return render_template('import.html')
-  result = importGraph(file)
+  name = request.form['graphName']
+  result = importGraph(file, name)
   flash(result)
   return render_template('result.html')
