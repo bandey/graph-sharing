@@ -1,6 +1,7 @@
 from webserver import app
 from flask import request, session, redirect, url_for, flash, render_template
 from actions.import_graph import importGraph
+from actions.delete_graph import deleteGraph
 from database.models import graph
 
 @app.route('/')
@@ -44,3 +45,10 @@ def route_import():
   result = importGraph(file, name)
   flash(result)
   return render_template('result.html')
+
+@app.route('/delete/<id>', methods=['POST'])
+def route_delete(id):
+  if 'visitor' not in session:
+    return redirect(url_for('route_auth'))
+  deleteGraph(id)
+  return redirect(url_for('route_index'))
