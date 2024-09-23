@@ -1,11 +1,12 @@
 from webserver import app
 from flask import request, session, redirect, url_for, flash, render_template
 from actions.import_graph import importGraph
+from database.models import graph
 
 @app.route('/')
 def route_index():
   if 'visitor' in session:
-    return render_template('hello.html')
+    return render_template('list.html', graphs=graph.getAll())
   else:
     return redirect(url_for('route_auth'))
 

@@ -1,0 +1,13 @@
+{% extends 'menu.html' %}
+{% block body %}
+  <h1>Список графов</h1>
+  {% if graphs %}
+    <table>
+    {% for graph in graphs %}
+      <tr>
+        <td>{{ graph.name }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}
