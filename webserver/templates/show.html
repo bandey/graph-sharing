@@ -21,7 +21,13 @@
     const cy = cytoscape({
       container: document.getElementById('cy'),
       wheelSensitivity: 0.25,
-      elements: []
+      elements: {
+        nodes: [
+          {% for vertex in vertices %}
+            {data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}},
+          {% endfor %}
+        ],
+      },
     });
     cy.layout({name: 'circle'}).run();
   </script>

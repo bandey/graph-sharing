@@ -2,7 +2,7 @@ from webserver import app
 from flask import request, session, redirect, url_for, flash, render_template
 from actions.import_graph import importGraph
 from actions.delete_graph import deleteGraph
-from database.models import graph
+from database.models import graph, vertex
 
 @app.route('/')
 def route_index():
@@ -49,7 +49,8 @@ def route_import():
 @app.route('/s/<id>')
 def route_s(id):
   g = graph.getOne(id)
-  return render_template('show.html', graph=g)
+  vs = vertex.getByGraphId(id)
+  return render_template('show.html', graph=g, vertices=vs)
 
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):
