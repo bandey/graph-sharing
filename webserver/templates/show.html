@@ -27,6 +27,11 @@
             {data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}},
           {% endfor %}
         ],
+        edges: [
+          {% for edge in edges %}
+            {data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'}},
+          {% endfor %}
+        ],
       },
     });
     cy.layout({name: 'circle'}).run();
