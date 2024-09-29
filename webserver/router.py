@@ -48,7 +48,8 @@ def route_import():
 
 @app.route('/s/<id>')
 def route_s(id):
-  return render_template('show.html')
+  g = graph.getOne(id)
+  return render_template('show.html', graph=g)
 
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):

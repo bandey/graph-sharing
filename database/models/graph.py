@@ -9,6 +9,10 @@ def getAll():
   graphs = dbClient().gs_graph.find()
   return graphs
 
+def getOne(id):
+  graph = dbClient().gs_graph.find_one({'_id': ObjectId(id)})
+  return graph
+
 def delete(id):
   result = dbClient().gs_graph.delete_one({'_id': ObjectId(id)})
   return result
