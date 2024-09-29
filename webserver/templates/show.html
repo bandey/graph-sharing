@@ -33,6 +33,24 @@
           {% endfor %}
         ],
       },
+      style: [
+        {
+          selector: 'node',
+          style: {
+            label: 'data(name)',
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'curve-style': 'bezier',
+            'target-arrow-shape': 'triangle-backcurve',
+            'width': 1,
+            label: 'data(name)',
+            'text-rotation': 'autorotate',
+          }
+        },
+      ]
     });
     cy.layout({name: 'circle'}).run();
   </script>
