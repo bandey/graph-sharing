@@ -1,5 +1,26 @@
 {% extends 'layout-main.html' %}
 
+{% block head %}
+  <style>
+    #cy {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script src="/static/cytoscape.min.js"></script>
+{% endblock %}
+
 {% block body %}
-  <h1>Show</h1>
+  <div id="cy"></div>
+  <script>
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      wheelSensitivity: 0.25,
+      elements: []
+    });
+    cy.layout({name: 'circle'}).run();
+  </script>
 {% endblock %}
