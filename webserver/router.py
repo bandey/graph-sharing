@@ -17,8 +17,12 @@ def route_auth():
 
 @app.route('/auth/enter', methods=['POST'])
 def route_auth_enter():
-  session['visitor'] = request.form['login']
-  return redirect(url_for('route_index'))
+  if ((request.form['login'] == app.config['HARD_LOGIN']) and 
+      (request.form['passw'] == app.config['HARD_PASSW'])):
+    session['visitor'] = request.form['login']
+    return redirect(url_for('route_index'))
+  else:
+    return render_template('login-form.html')
 
 @app.route('/auth/exit', methods=['GET', 'POST'])
 def route_auth_exit():
