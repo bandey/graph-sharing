@@ -46,6 +46,10 @@ def route_import():
   flash(result)
   return render_template('result.html')
 
+@app.route('/s/<id>')
+def route_s(id):
+  return render_template('show.html')
+
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):
   if 'visitor' not in session:
