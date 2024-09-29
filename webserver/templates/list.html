@@ -6,6 +6,7 @@
     {% for graph in graphs %}
       <tr>
         <td>{{ graph.name }}</td>
+        <td><a href="{{ '/s/%s' % graph._id }}">ссылка</a></td>
         <td>
           <form method="post" action={{ '/delete/%s' % graph._id }}>
             <button type="submit" onclick="return confirm('Удалить этот граф?')">Удалить</button>
