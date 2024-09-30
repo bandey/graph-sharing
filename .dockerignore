@@ -1,5 +1,5 @@
 # docker
-Dockerfile
+/Dockerfile
 
 # git
 .git/
@@ -7,9 +7,7 @@ Dockerfile
 .gitignore
 
 # virtual environment
-env/
+/env/
 
 # Python caches
 __pycache__/
-database/__pycache__/
-webserver/__pycache__/
