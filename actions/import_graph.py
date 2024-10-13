@@ -15,28 +15,35 @@ def importGraph(file, name):
   # add new graph to database
   graph_id = graph.insert({'name': name})
 
-  # loop all persons
-  for elem in root['persons']:
+  # loop all vertices
+  for elem in root['vertices']:
     # rename special fields _id and _key
     elem['id'] = elem['_id']
     del elem['_id']
     elem['key'] = elem['_key']
     del elem['_key']
+    # drop special field _rev
+    del elem['_rev']
     # add graph_id field
     elem['graph_id'] = graph_id
-    # save person in database
+    # save vertex in database
     vertex.insert(elem)
 
-  # loop all relates
-  for elem in root['relates']:
-    # rename special fields _from and _to
+  # loop all edges
+  for elem in root['edges']:
+    # rename special fields _id, _from and _to
+    elem['id'] = elem['_id']
+    del elem['_id']
     elem['source'] = elem['_from']
     del elem['_from']
     elem['target'] = elem['_to']
     del elem['_to']
+    # drop special fields _key and _rev
+    del elem['_key']
+    del elem['_rev']
     # add graph_id field
     elem['graph_id'] = graph_id
-    # save relate in database
+    # save edge in database
     edge.insert(elem)
   
   return 'Данные из файла успешно импортированы'
