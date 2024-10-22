@@ -32,7 +32,10 @@
         ],
         edges: [
           {% for edge in edges %}
-            {data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'}},
+            {
+              data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'},
+              classes: ['{{ edge.class }}'],
+            },
           {% endfor %}
         ],
       },
@@ -70,6 +73,45 @@
             'width': 1,
             label: 'data(name)',
             'text-rotation': 'autorotate',
+          }
+        },
+        {
+          selector: 'edge.subdivide',
+          style: {
+            'line-color': 'royalblue',
+          }
+        },
+        {
+          selector: 'edge.participate',
+          style: {
+            'line-color': 'orchid',
+          }
+        },
+        {
+          selector: 'edge.locate',
+          style: {
+            'line-color': 'lightseagreen',
+          }
+        },
+        {
+          selector: 'edge.relate',
+          style: {
+            'curve-style': 'bezier',
+            'target-arrow-shape': 'triangle-backcurve',
+            'line-color': 'orangered',
+            'target-arrow-color': 'orangered',
+          }
+        },
+        {
+          selector: 'edge.settle',
+          style: {
+            'line-color': 'saddlebrown',
+          }
+        },
+        {
+          selector: 'edge.shelter',
+          style: {
+            'line-color': 'saddlebrown',
           }
         },
       ]

@@ -43,6 +43,8 @@ def importGraph(file, name):
     # drop special fields _key and _rev
     del elem['_key']
     del elem['_rev']
+    # add class field
+    elem['class'] = elem['id'].split('/',1)[0]
     # add graph_id field
     elem['graph_id'] = graph_id
     # save edge in database
