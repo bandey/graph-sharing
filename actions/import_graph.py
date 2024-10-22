@@ -24,6 +24,8 @@ def importGraph(file, name):
     del elem['_key']
     # drop special field _rev
     del elem['_rev']
+    # add class field
+    elem['class'] = elem['id'].split('/',1)[0]
     # add graph_id field
     elem['graph_id'] = graph_id
     # save vertex in database

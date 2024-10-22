@@ -24,7 +24,10 @@
       elements: {
         nodes: [
           {% for vertex in vertices %}
-            {data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}},
+            {
+              data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}, 
+              classes: ['{{ vertex.class }}'],
+            },
           {% endfor %}
         ],
         edges: [
@@ -41,10 +44,29 @@
           }
         },
         {
+          selector: 'node.bargain',
+          style: {
+            shape: 'rectangle',
+            'background-color': 'blue',
+          }
+        },
+        {
+          selector: 'node.person',
+          style: {
+            shape: 'ellipse',
+            'background-color': 'crimson',
+          }
+        },
+        {
+          selector: 'node.area',
+          style: {
+            shape: 'hexagon',
+            'background-color': 'green',
+          }
+        },
+        {
           selector: 'edge',
           style: {
-            'curve-style': 'bezier',
-            'target-arrow-shape': 'triangle-backcurve',
             'width': 1,
             label: 'data(name)',
             'text-rotation': 'autorotate',
