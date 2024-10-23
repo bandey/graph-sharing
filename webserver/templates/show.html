@@ -30,6 +30,8 @@
       ,
       <a href="#" onclick="return layoutGraph('circle')">круг</a>
       ,
+      <a href="#" onclick="return layoutGraph('concentric')">концентрически</a>
+      ,
       <a href="#" onclick="return layoutGraph('cose')">силовой-алгоритм</a>
     </div>
   {% else %}
@@ -163,6 +165,11 @@
             name: 'cose',
             nodeRepulsion: (node) => 300*2048,
             nodeOverlap: 300*4,
+          }).run();
+        } else if (name == 'concentric') {
+          cy.layout({
+            name: 'concentric',
+            spacingFactor: 4,
           }).run();
         } else {
           cy.layout({name: name}).run();
