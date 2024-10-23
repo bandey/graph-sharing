@@ -13,6 +13,10 @@ def getOne(id):
   graph = dbClient().gs_graph.find_one({'_id': ObjectId(id)})
   return graph
 
+def getOneByName(name):
+  graph = dbClient().gs_graph.find_one({'name': name})
+  return graph
+
 def update(id, modifier):
   result = dbClient().gs_graph.find_one_and_update({'_id': ObjectId(id)}, {'$set': modifier})
   return result

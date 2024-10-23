@@ -2,6 +2,14 @@ import json
 from database.models import graph, vertex, edge
 
 def importGraph(file, name):
+  # check given graph name
+  graphName = name.strip()
+  if len(graphName) < 1:
+    return 'Ошибка: Не указано имя графа'
+  # check if graph with given name already exist
+  if graph.getOneByName(graphName):
+    return 'Ошибка: Граф с указанным названием уже есть'
+
   # go to begin of file
   file.seek(0)
   # read binary data and decode it to string
@@ -13,7 +21,7 @@ def importGraph(file, name):
   root = data[0]
 
   # add new graph to database
-  graph_id = graph.insert({'name': name})
+  graph_id = graph.insert({'name': graphName})
 
   # loop all vertices
   for elem in root['vertices']:
