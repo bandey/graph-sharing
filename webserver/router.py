@@ -1,6 +1,7 @@
 from webserver import app
 from flask import request, session, redirect, url_for, flash, render_template
 from actions.import_graph import importGraph
+from actions.save_graph import saveGraph
 from actions.delete_graph import deleteGraph
 from database.models import graph, vertex, edge
 
@@ -59,6 +60,15 @@ def route_s(id):
   vs = vertex.getByGraphId(id)
   es = edge.getByGraphId(id)
   return render_template('show.html', mode=m, graph=g, vertices=vs, edges=es)
+
+@app.route('/save/<id>', methods=['POST'])
+def route_save(id):
+  if 'visitor' not in session:
+    return redirect(url_for('route_auth'))
+  data = request.form['jsonData']
+  result = saveGraph(id, data)
+  flash(result)
+  return render_template('result.html')
 
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):

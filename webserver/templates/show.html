@@ -21,6 +21,7 @@
     <div>
       <a href="/">Отмена</a>
       |
+      <a href="#" onclick="return saveGraph()">Сохранить</a>
     </div>
   {% else %}
     <div style="text-align: center;">
@@ -30,7 +31,14 @@
 {% endblock %}
 
 {% block body %}
+  {% if mode == 'edit' %}
+    <form id="saveForm" method="post" action={{ '/save/%s' % graph._id }}>
+      <input type="hidden" name="jsonData" id="jsonData">
+    </form>
+  {% endif %}
+
   <div id="cy"></div>
+
   <script>
     const cy = cytoscape({
       container: document.getElementById('cy'),
@@ -131,5 +139,23 @@
       ]
     });
     cy.layout({name: 'circle'}).run();
+
+    {% if mode == 'edit' %}
+      function saveGraph() {
+        let data = [];
+        cy.nodes().forEach((node) => {
+          data.push({
+            id: node.id(),
+            x: Math.round(node.position().x),
+            y: Math.round(node.position().y),
+          });
+        });
+
+        document.getElementById('jsonData').value = JSON.stringify(data);
+        document.getElementById('saveForm').submit();
+
+        return false;
+      };
+    {% endif %}
   </script>
 {% endblock %}
