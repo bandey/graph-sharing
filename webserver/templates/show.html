@@ -14,6 +14,11 @@
     }
   </style>
   <script src="/static/cytoscape.min.js"></script>
+  {% if mode == 'edit' %}
+    <script src="/static/layout-base.js"></script>
+    <script src="/static/avsdf-base.js"></script>
+    <script src="/static/cytoscape-avsdf.js"></script>
+  {% endif %}
 {% endblock %}
 
 {% block menu %}
@@ -24,13 +29,9 @@
       <a href="#" onclick="return saveGraph()">Сохранить</a>
       |
       Разложить:
-      <a href="#" onclick="return layoutGraph('grid')">решетка</a>
-      ,
       <a href="#" onclick="return layoutGraph('breadthfirst')">иерархия</a>
       ,
-      <a href="#" onclick="return layoutGraph('circle')">круг</a>
-      ,
-      <a href="#" onclick="return layoutGraph('concentric')">концентрически</a>
+      <a href="#" onclick="return layoutGraph('avsdf')">круг</a>
       ,
       <a href="#" onclick="return layoutGraph('cose')">силовой-алгоритм</a>
     </div>
@@ -166,10 +167,11 @@
             nodeRepulsion: (node) => 300*2048,
             nodeOverlap: 300*4,
           }).run();
-        } else if (name == 'concentric') {
+        } else if (name == 'avsdf') {
           cy.layout({
-            name: 'concentric',
-            spacingFactor: 4,
+            name: 'avsdf',
+            spacingFactor: 2,
+            animate: false,
           }).run();
         } else {
           cy.layout({name: name}).run();
