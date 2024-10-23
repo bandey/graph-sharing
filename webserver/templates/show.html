@@ -49,6 +49,7 @@
             {
               data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}, 
               classes: ['{{ vertex.class }}'],
+              position: {x: {{ vertex.x or 0 }}, y: {{ vertex.y or 0 }}},
             },
           {% endfor %}
         ],
@@ -136,9 +137,15 @@
             'line-color': 'saddlebrown',
           }
         },
-      ]
+      ],
+      {% if graph.layout %}
+        layout: {name: '{{ graph.layout }}'},
+      {% endif %}
     });
-    cy.layout({name: 'circle'}).run();
+
+    {% if not graph.layout %}
+      cy.layout({name: 'circle'}).run();
+    {% endif %}
 
     {% if mode == 'edit' %}
       function saveGraph() {
