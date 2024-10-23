@@ -52,10 +52,13 @@ def route_import():
 
 @app.route('/s/<id>')
 def route_s(id):
+  m = 'show'
+  if 'visitor' in session:
+    m = 'edit'
   g = graph.getOne(id)
   vs = vertex.getByGraphId(id)
   es = edge.getByGraphId(id)
-  return render_template('show.html', graph=g, vertices=vs, edges=es)
+  return render_template('show.html', mode=m, graph=g, vertices=vs, edges=es)
 
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):
