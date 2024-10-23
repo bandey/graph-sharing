@@ -29,6 +29,8 @@
       <a href="#" onclick="return layoutGraph('breadthfirst')">иерархия</a>
       ,
       <a href="#" onclick="return layoutGraph('circle')">круг</a>
+      ,
+      <a href="#" onclick="return layoutGraph('cose')">силовой-алгоритм</a>
     </div>
   {% else %}
     <div style="text-align: center;">
@@ -156,7 +158,15 @@
 
     {% if mode == 'edit' %}
       function layoutGraph(name) {
-        cy.layout({name: name}).run();
+        if (name == 'cose') {
+          cy.layout({
+            name: 'cose',
+            nodeRepulsion: (node) => 300*2048,
+            nodeOverlap: 300*4,
+          }).run();
+        } else {
+          cy.layout({name: name}).run();
+        }
       };
 
       function saveGraph() {
