@@ -22,6 +22,13 @@
       <a href="/">Отмена</a>
       |
       <a href="#" onclick="return saveGraph()">Сохранить</a>
+      |
+      Разложить:
+      <a href="#" onclick="return layoutGraph('grid')">решетка</a>
+      ,
+      <a href="#" onclick="return layoutGraph('breadthfirst')">иерархия</a>
+      ,
+      <a href="#" onclick="return layoutGraph('circle')">круг</a>
     </div>
   {% else %}
     <div style="text-align: center;">
@@ -144,10 +151,14 @@
     });
 
     {% if not graph.layout %}
-      cy.layout({name: 'circle'}).run();
+      cy.layout({name: 'grid'}).run();
     {% endif %}
 
     {% if mode == 'edit' %}
+      function layoutGraph(name) {
+        cy.layout({name: name}).run();
+      };
+
       function saveGraph() {
         let data = [];
         cy.nodes().forEach((node) => {
