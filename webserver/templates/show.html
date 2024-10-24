@@ -29,6 +29,8 @@
       |
       <a href="#" onclick="return saveGraph()">Сохранить</a>
       |
+      <input type="text" id="graphName" value="{{ graph.name }}" required autofocus>
+      |
       Разложить:
       <a href="#" onclick="return layoutGraph('breadthfirst')">иерархия</a>
       ,
@@ -183,9 +185,17 @@
       };
 
       function saveGraph() {
-        let data = [];
+        const input = document.getElementById('graphName');
+        const name = input.value.trim();
+        if (!name) {
+          input.value = '';
+          input.reportValidity();
+          return false;
+        }
+
+        let data = {name, pos: []};
         cy.nodes().forEach((node) => {
-          data.push({
+          data.pos.push({
             id: node.id(),
             x: Math.round(node.position().x),
             y: Math.round(node.position().y),
