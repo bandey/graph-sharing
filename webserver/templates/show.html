@@ -18,8 +18,8 @@
     <script src="/static/layout-base.js"></script>
     <script src="/static/avsdf-base.js"></script>
     <script src="/static/cytoscape-avsdf.js"></script>
-    <script src="/static/FileSaver.min.js"></script>
   {% endif %}
+  <script src="/static/FileSaver.min.js"></script>
 {% endblock %}
 
 {% block menu %}
@@ -39,8 +39,9 @@
       <a href="#" onclick="return takeScreenshot()">Скриншот</a>
     </div>
   {% else %}
-    <div style="text-align: center;">
-      {{ graph.name }}
+    <div style="display: flex;">
+      <span style="flex-grow: 1; text-align: center;">{{ graph.name }}</span>
+      <button type="button" onclick="return takeScreenshot()">скриншот</button>
     </div>
   {% endif %}
 {% endblock %}
@@ -196,11 +197,11 @@
 
         return false;
       };
-
-      function takeScreenshot() {
-        saveAs(cy.png({bg: 'white'}), '{{ "%s.png" % graph.name }}');
-        return false;
-      };
     {% endif %}
+
+    function takeScreenshot() {
+      saveAs(cy.png({bg: 'white'}), '{{ "%s.png" % graph.name }}');
+      return false;
+    };
   </script>
 {% endblock %}
