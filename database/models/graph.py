@@ -6,7 +6,7 @@ def insert(graph):
   return result.inserted_id
 
 def getAll():
-  graphs = dbClient().gs_graph.find()
+  graphs = dbClient().gs_graph.find().sort('name')
   return graphs
 
 def getOne(id):
