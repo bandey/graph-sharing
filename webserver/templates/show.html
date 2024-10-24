@@ -18,6 +18,7 @@
     <script src="/static/layout-base.js"></script>
     <script src="/static/avsdf-base.js"></script>
     <script src="/static/cytoscape-avsdf.js"></script>
+    <script src="/static/FileSaver.min.js"></script>
   {% endif %}
 {% endblock %}
 
@@ -34,6 +35,8 @@
       <a href="#" onclick="return layoutGraph('avsdf')">круг</a>
       ,
       <a href="#" onclick="return layoutGraph('cose')">силовой-алгоритм</a>
+      |
+      <a href="#" onclick="return takeScreenshot()">Скриншот</a>
     </div>
   {% else %}
     <div style="text-align: center;">
@@ -191,6 +194,11 @@
         document.getElementById('jsonData').value = JSON.stringify(data);
         document.getElementById('saveForm').submit();
 
+        return false;
+      };
+
+      function takeScreenshot() {
+        saveAs(cy.png({bg: 'white'}), '{{ "%s.png" % graph.name }}');
         return false;
       };
     {% endif %}
