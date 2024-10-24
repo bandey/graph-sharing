@@ -3,8 +3,15 @@ from database.models import graph, vertex
 from bson.objectid import ObjectId
 
 def saveGraph(graphId, jsonData):
+  # check if graph with given id not exist
+  if not graph.getOne(graphId):
+    return 'Ошибка: Указанный граф не найден'
+
   # parse json string
-  data = json.loads(jsonData)
+  try:
+    data = json.loads(jsonData)
+  except Exception as err:
+    return 'Ошибка: Невозможно разобрать json-строку'
 
   # check given graph name
   graphName = data['name']

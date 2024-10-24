@@ -13,10 +13,17 @@ def importGraph(file, name):
   # go to begin of file
   file.seek(0)
   # read binary data and decode it to string
-  buffBinary = file.read()
-  buffString = buffBinary.decode()
+  try:
+    buffBinary = file.read()
+    buffString = buffBinary.decode()
+  except Exception as err:
+    return 'Ошибка: Невозможно декодировать файл'
+
   # parse json string
-  data = json.loads(buffString)
+  try:
+    data = json.loads(buffString)
+  except Exception as err:
+    return 'Ошибка: Невозможно разобрать json-файл'
   # get root object
   root = data[0]
 

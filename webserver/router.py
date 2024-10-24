@@ -57,6 +57,9 @@ def route_s(id):
   if 'visitor' in session:
     m = 'edit'
   g = graph.getOne(id)
+  if not g:
+    flash('Ошибка: Указанный граф не найден')
+    return render_template('result.html')
   vs = vertex.getByGraphId(id)
   es = edge.getByGraphId(id)
   return render_template('show.html', mode=m, graph=g, vertices=vs, edges=es)
