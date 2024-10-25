@@ -6,5 +6,3 @@ class Config:
   SERV_PORT = os.environ.get('TASK_SERV_PORT') or 8080
   DB_CONNECT = os.environ.get('TASK_DB_CONNECT') or 'mongodb://localhost/test'
   SECRET_KEY = os.environ.get('TASK_SECRET_KEY') or 'A_SECRET_KEY'
-  HARD_LOGIN = os.environ.get('TASK_LOGIN') or 'test'
-  HARD_PASSW = os.environ.get('TASK_PASSW') or '123'
