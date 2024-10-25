@@ -19,7 +19,7 @@ def route_auth():
 
 @app.route('/auth/enter', methods=['POST'])
 def route_auth_enter():
-  errMsg = auth.enter(request.form['login'], request.form['passw'])
+  errMsg = auth.enter(request.form.get('login'), request.form.get('passw'))
   if errMsg:
     flash(errMsg)
     return render_template('login-form.html')
@@ -36,18 +36,11 @@ def route_import():
     return redirect(url_for('route_auth'))
   if request.method == 'GET':
     return render_template('import.html')
-  if 'graphName' not in request.form:
-    flash('Не указано имя графа')
-    return render_template('import.html')
-  if 'dataFile' not in request.files:
+  file = request.files.get('dataFile')
+  if (not file) or (not file.filename):
     flash('Не выбран файл для импорта')
     return render_template('import.html')
-  file = request.files['dataFile']
-  if file.filename == '':
-    flash('Не выбран файл для импорта')
-    return render_template('import.html')
-  name = request.form['graphName']
-  result = importGraph(file, name)
+  result = importGraph(file, request.form.get('graphName', ''))
   flash(result)
   return render_template('result.html')
 
@@ -68,8 +61,7 @@ def route_s(id):
 def route_save(id):
   if not auth.check():
     return redirect(url_for('route_auth'))
-  data = request.form['jsonData']
-  result = saveGraph(id, data)
+  result = saveGraph(id, request.form.get('jsonData', ''))
   flash(result)
   return render_template('result.html')
 
