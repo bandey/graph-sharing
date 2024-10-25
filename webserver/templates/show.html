@@ -66,7 +66,7 @@
           {% for vertex in vertices %}
             {
               data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}, 
-              classes: ['{{ vertex.class }}'],
+              classes: ['{{ vertex.class|join("','") }}'],
               position: {x: {{ vertex.x or 0 }}, y: {{ vertex.y or 0 }}},
             },
           {% endfor %}
@@ -75,7 +75,7 @@
           {% for edge in edges %}
             {
               data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'},
-              classes: ['{{ edge.class }}'],
+              classes: ['{{ edge.class|join("','") }}'],
             },
           {% endfor %}
         ],
