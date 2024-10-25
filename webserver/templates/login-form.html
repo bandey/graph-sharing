@@ -6,4 +6,11 @@
     <p><input type="password" name="passw" placeholder="пароль" required></p>
     <p><input type="submit" value="Войти"></p>
   </form>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 {% endblock %}

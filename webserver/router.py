@@ -1,5 +1,6 @@
 from webserver import app
-from flask import request, session, redirect, url_for, flash, render_template
+from flask import request, redirect, url_for, flash, render_template
+from . import auth
 from actions.import_graph import importGraph
 from actions.save_graph import saveGraph
 from actions.delete_graph import deleteGraph
@@ -7,7 +8,7 @@ from database.models import graph, vertex, edge
 
 @app.route('/')
 def route_index():
-  if 'visitor' in session:
+  if auth.check():
     return render_template('list.html', graphs=graph.getAll())
   else:
     return redirect(url_for('route_auth'))
@@ -18,21 +19,20 @@ def route_auth():
 
 @app.route('/auth/enter', methods=['POST'])
 def route_auth_enter():
-  if ((request.form['login'] == app.config['HARD_LOGIN']) and 
-      (request.form['passw'] == app.config['HARD_PASSW'])):
-    session['visitor'] = request.form['login']
-    return redirect(url_for('route_index'))
-  else:
+  errMsg = auth.enter(request.form['login'], request.form['passw'])
+  if errMsg:
+    flash(errMsg)
     return render_template('login-form.html')
+  return redirect(url_for('route_index'))
 
 @app.route('/auth/exit', methods=['GET', 'POST'])
 def route_auth_exit():
-  session.pop('visitor', None)  
+  auth.exit()
   return redirect(url_for('route_auth'))
 
 @app.route('/import', methods=['GET', 'POST'])
 def route_import():
-  if 'visitor' not in session:
+  if not auth.check():
     return redirect(url_for('route_auth'))
   if request.method == 'GET':
     return render_template('import.html')
@@ -54,7 +54,7 @@ def route_import():
 @app.route('/s/<id>')
 def route_s(id):
   m = 'show'
-  if 'visitor' in session:
+  if auth.check():
     m = 'edit'
   g = graph.getOne(id)
   if not g:
@@ -66,7 +66,7 @@ def route_s(id):
 
 @app.route('/save/<id>', methods=['POST'])
 def route_save(id):
-  if 'visitor' not in session:
+  if not auth.check():
     return redirect(url_for('route_auth'))
   data = request.form['jsonData']
   result = saveGraph(id, data)
@@ -75,7 +75,7 @@ def route_save(id):
 
 @app.route('/delete/<id>', methods=['POST'])
 def route_delete(id):
-  if 'visitor' not in session:
+  if not auth.check():
     return redirect(url_for('route_auth'))
   deleteGraph(id)
   return redirect(url_for('route_index'))
