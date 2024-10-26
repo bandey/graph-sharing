@@ -1,5 +1,11 @@
 from database.models import graph, vertex, edge
 
+def embraceArr(inpArr):
+  resArr = []
+  for val in inpArr:
+    resArr.extend([val, '[' + val + ']', '(' + val + ')'])
+  return resArr
+
 def loadGraph(id):
   g = graph.getOne(id)
   if not g:
@@ -20,6 +26,11 @@ def loadGraph(id):
   for elem in es:
     if kind == 'relatives':
       elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
+      if elem['name'] in embraceArr(['супруг', 'супруга']):
+        elem['class'].append('relate-married')
+      elif not elem['name'] in embraceArr(['брат', 'сестра', 'сын', 'дочь',
+          'отец', 'мать','внук', 'внучка', 'дедушка', 'бабушка']):
+        elem['class'].append('relate-distant')
     else:
       elem['label'] = elem['name']
     edges.append(elem)

@@ -66,7 +66,7 @@
           {% for vertex in graph.vertices %}
             {
               data: {id: '{{ vertex.id }}', label: '{{ vertex.label }}'}, 
-              classes: ['{{ vertex.class|join("','") }}'],
+              classes: ['{{ vertex.class|join("','")|safe }}'],
               position: {x: {{ vertex.x or 0 }}, y: {{ vertex.y or 0 }}},
             },
           {% endfor %}
@@ -75,7 +75,7 @@
           {% for edge in graph.edges %}
             {
               data: {source: '{{ edge.source }}', target: '{{ edge.target }}', label: '{{ edge.label }}'},
-              classes: ['{{ edge.class|join("','") }}'],
+              classes: ['{{ edge.class|join("','")|safe }}'],
             },
           {% endfor %}
         ],
@@ -153,6 +153,20 @@
           selector: 'edge.shelter',
           style: {
             'line-color': 'saddlebrown',
+          }
+        },
+        {
+          selector: 'edge.relate-married',
+          style: {
+            'line-color': 'forestgreen',
+            'target-arrow-color': 'forestgreen',
+          }
+        },
+        {
+          selector: 'edge.relate-distant',
+          style: {
+            'line-color': 'royalblue',
+            'target-arrow-color': 'royalblue',
           }
         },
       ],
