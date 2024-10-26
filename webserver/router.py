@@ -2,9 +2,10 @@ from webserver import app
 from flask import request, redirect, url_for, flash, render_template
 from . import auth
 from actions.import_graph import importGraph
+from actions.load_graph import loadGraph
 from actions.save_graph import saveGraph
 from actions.delete_graph import deleteGraph
-from database.models import graph, vertex, edge
+from database.models import graph
 
 @app.route('/')
 def route_index():
@@ -46,16 +47,12 @@ def route_import():
 
 @app.route('/s/<id>')
 def route_s(id):
-  m = 'show'
-  if auth.check():
-    m = 'edit'
-  g = graph.getOne(id)
+  m = 'edit' if auth.check() else 'show'
+  g = loadGraph(id)
   if not g:
     flash('Ошибка: Указанный граф не найден')
     return render_template('result.html')
-  vs = vertex.getByGraphId(id)
-  es = edge.getByGraphId(id)
-  return render_template('show.html', mode=m, graph=g, vertices=vs, edges=es)
+  return render_template('show.html', mode=m, graph=g)
 
 @app.route('/save/<id>', methods=['POST'])
 def route_save(id):

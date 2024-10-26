@@ -63,7 +63,7 @@
       wheelSensitivity: 0.2,
       elements: {
         nodes: [
-          {% for vertex in vertices %}
+          {% for vertex in graph.vertices %}
             {
               data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}, 
               classes: ['{{ vertex.class|join("','") }}'],
@@ -72,7 +72,7 @@
           {% endfor %}
         ],
         edges: [
-          {% for edge in edges %}
+          {% for edge in graph.edges %}
             {
               data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'},
               classes: ['{{ edge.class|join("','") }}'],
