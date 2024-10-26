@@ -65,7 +65,7 @@
         nodes: [
           {% for vertex in graph.vertices %}
             {
-              data: {id: '{{ vertex.id }}', name: '{{ vertex.name }}'}, 
+              data: {id: '{{ vertex.id }}', label: '{{ vertex.label }}'}, 
               classes: ['{{ vertex.class|join("','") }}'],
               position: {x: {{ vertex.x or 0 }}, y: {{ vertex.y or 0 }}},
             },
@@ -74,7 +74,7 @@
         edges: [
           {% for edge in graph.edges %}
             {
-              data: {source: '{{ edge.source }}', target: '{{ edge.target }}', name: '{{ edge.name }}'},
+              data: {source: '{{ edge.source }}', target: '{{ edge.target }}', label: '{{ edge.label }}'},
               classes: ['{{ edge.class|join("','") }}'],
             },
           {% endfor %}
@@ -84,7 +84,7 @@
         {
           selector: 'node',
           style: {
-            label: 'data(name)',
+            label: 'data(label)',
           }
         },
         {
@@ -112,7 +112,7 @@
           selector: 'edge',
           style: {
             'width': 1,
-            label: 'data(name)',
+            label: 'data(label)',
             'text-rotation': 'autorotate',
           }
         },
