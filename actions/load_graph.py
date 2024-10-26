@@ -17,14 +17,24 @@ def loadGraph(id):
 
   # Decorate vertices
   vertices = []
+  bargains = set()
   for elem in vs:
     elem['label'] = elem['name']
     vertices.append(elem)
+    if 'bargain' in elem['class']:
+      bargains.add(elem['key'])
 
   # Decorate edges
   edges = []
   for elem in es:
-    if kind == 'relatives':
+    if kind == 'bargain':
+      origins = elem.get('origins')
+      if origins and (len(bargains.intersection(origins)) < 1):
+        elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
+        elem['class'].append('another-bargain')
+      else:
+        elem['label'] = elem['name']
+    elif kind == 'relatives':
       elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
       if elem['name'] in embraceArr(['супруг', 'супруга']):
         elem['class'].append('relate-married')
