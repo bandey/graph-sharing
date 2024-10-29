@@ -34,6 +34,12 @@ def loadGraph(id):
         elem['class'].append('another-bargain')
       else:
         elem['label'] = elem['name']
+    elif kind == 'person':
+      origins = elem.get('origins')
+      if origins:
+        elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
+      else:
+        elem['label'] = elem['name']
     elif kind == 'relatives':
       elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
       if elem['name'] in embraceArr(['супруг', 'супруга']):
