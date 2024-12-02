@@ -34,7 +34,7 @@ def loadGraph(id):
         elem['class'].append('another-bargain')
       else:
         elem['label'] = elem['name']
-    elif kind == 'person':
+    elif (kind == 'person') or (kind == 'area'):
       origins = elem.get('origins')
       if origins:
         elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
