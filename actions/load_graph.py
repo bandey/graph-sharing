@@ -19,7 +19,10 @@ def loadGraph(id):
   vertices = []
   bargains = set()
   for elem in vs:
-    elem['label'] = elem['name']
+    if ('person' in elem['class']) and (not ' ' in elem['name']):
+      elem['label'] = elem['key'] + ' ' + elem['name']
+    else:
+      elem['label'] = elem['name']
     vertices.append(elem)
     if 'bargain' in elem['class']:
       bargains.add(elem['key'])
