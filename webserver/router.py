@@ -1,10 +1,11 @@
 from webserver import app
-from flask import request, redirect, url_for, flash, render_template
+from flask import request, Response, redirect, url_for, json, flash, render_template
 from . import auth
 from actions.import_graph import importGraph
 from actions.load_graph import loadGraph
 from actions.save_graph import saveGraph
 from actions.delete_graph import deleteGraph
+from actions.export_graph import exportGraph
 from database.models import graph
 
 @app.route('/')
@@ -68,3 +69,16 @@ def route_delete(id):
     return redirect(url_for('route_auth'))
   deleteGraph(id)
   return redirect(url_for('route_index'))
+
+@app.route('/export/<id>')
+def route_export(id):
+  sJson = ''
+  if not auth.check():
+    sJson = json.dumps({'error': 'Not authorized'})
+  else:
+    g = exportGraph(id)
+    if not g:
+      sJson = json.dumps({'error': 'Graph not found'})
+    else:
+      sJson = json.dumps(g, ensure_ascii=False, sort_keys=False)
+  return Response(sJson, content_type='application/json; charset=utf-8')

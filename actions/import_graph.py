@@ -28,7 +28,8 @@ def importGraph(file, name):
   root = data[0]
 
   # add new graph to database
-  graph_id = graph.insert({'name': graphName, 'kind': root.get('kind', '')})
+  graph_id = graph.insert({'name': graphName, 'kind': root.get('kind', ''), 
+    'layout': root.get('layout', '')})
 
   # loop all vertices
   for elem in root.get('vertices', []):
@@ -38,7 +39,8 @@ def importGraph(file, name):
     elem['key'] = elem['_key']
     del elem['_key']
     # drop special field _rev
-    del elem['_rev']
+    if '_rev' in elem:
+      del elem['_rev']
     # add class field
     elem['class'] = [elem['id'].split('/',1)[0]]
     # add graph_id field
@@ -56,8 +58,10 @@ def importGraph(file, name):
     elem['target'] = elem['_to']
     del elem['_to']
     # drop special fields _key and _rev
-    del elem['_key']
-    del elem['_rev']
+    if '_key' in elem:
+      del elem['_key']
+    if '_rev' in elem:
+      del elem['_rev']
     # add class field
     elem['class'] = [elem['id'].split('/',1)[0]]
     # add graph_id field

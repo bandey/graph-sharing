@@ -38,6 +38,8 @@
       ,
       <a href="#" onclick="return layoutGraph('cose')">силовой-алгоритм</a>
       |
+      <a href="#" onclick="return exportJson()">Экспорт</a>
+      |
       <a href="#" onclick="return takeScreenshot()">Скриншот</a>
     </div>
   {% else %}
@@ -229,6 +231,11 @@
         document.getElementById('jsonData').value = JSON.stringify(data);
         document.getElementById('saveForm').submit();
 
+        return false;
+      };
+
+      function exportJson() {
+        saveAs('{{ '/export/%s' % graph._id }}', '{{ "%s.json" % graph.name }}');
         return false;
       };
     {% endif %}
