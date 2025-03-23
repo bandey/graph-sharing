@@ -181,6 +181,64 @@
             'line-style': 'dashed',
           }
         },
+        {
+          selector: 'node.role',
+          style: {
+            shape: 'pentagon',
+            'background-color': 'red',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
+          selector: 'node.rank',
+          style: {
+            shape: 'round-diamond',
+            'background-color': 'yellowgreen',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
+          selector: 'node.titul',
+          style: {
+            shape: 'round-triangle',
+            'background-color': 'dodgerblue',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.rank_play',
+          style: {
+            'line-color': 'forestgreen',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.titul_play',
+          style: {
+            'line-color': 'royalblue',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
       ],
       {% if graph.layout %}
         layout: {name: '{{ graph.layout }}'},
