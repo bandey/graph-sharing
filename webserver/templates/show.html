@@ -114,6 +114,42 @@
           }
         },
         {
+          selector: 'node.role',
+          style: {
+            shape: 'pentagon',
+            'background-color': 'tomato',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
+          selector: 'node.rank',
+          style: {
+            shape: 'round-diamond',
+            'background-color': 'yellowgreen',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
+          selector: 'node.titul',
+          style: {
+            shape: 'round-triangle',
+            'background-color': 'dodgerblue',
+            'text-halign': 'center',
+            'text-valign': 'center',
+            'text-outline-opacity': 0.7,
+            'text-outline-width': 1,
+            'text-outline-color': 'white',
+          }
+        },
+        {
           selector: 'edge',
           style: {
             'width': 1,
@@ -162,6 +198,58 @@
           }
         },
         {
+          selector: 'edge.rank_role',
+          style: {
+            'line-color': 'forestgreen',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.rank_person',
+          style: {
+            'line-color': 'forestgreen',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.titul_role',
+          style: {
+            'line-color': 'royalblue',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.titul_person',
+          style: {
+            'line-color': 'royalblue',
+            'text-rotation': 'none',
+            'text-background-opacity': 1,
+            'text-background-padding': 1,
+            'text-background-shape': 'round-rectangle',
+            'text-background-color': 'white',
+          }
+        },
+        {
+          selector: 'edge.regard',
+          style: {
+            'target-arrow-shape': 'triangle-backcurve',
+            'line-color': 'orchid',
+            'target-arrow-color': 'orchid',
+          }
+        },
+        {
           selector: 'edge.relate-married',
           style: {
             'line-color': 'forestgreen',
@@ -179,64 +267,6 @@
           selector: 'edge.another-bargain',
           style: {
             'line-style': 'dashed',
-          }
-        },
-        {
-          selector: 'node.role',
-          style: {
-            shape: 'pentagon',
-            'background-color': 'tomato',
-            'text-halign': 'center',
-            'text-valign': 'center',
-            'text-outline-opacity': 0.7,
-            'text-outline-width': 1,
-            'text-outline-color': 'white',
-          }
-        },
-        {
-          selector: 'node.rank',
-          style: {
-            shape: 'round-diamond',
-            'background-color': 'yellowgreen',
-            'text-halign': 'center',
-            'text-valign': 'center',
-            'text-outline-opacity': 0.7,
-            'text-outline-width': 1,
-            'text-outline-color': 'white',
-          }
-        },
-        {
-          selector: 'node.titul',
-          style: {
-            shape: 'round-triangle',
-            'background-color': 'dodgerblue',
-            'text-halign': 'center',
-            'text-valign': 'center',
-            'text-outline-opacity': 0.7,
-            'text-outline-width': 1,
-            'text-outline-color': 'white',
-          }
-        },
-        {
-          selector: 'edge.rank_play',
-          style: {
-            'line-color': 'forestgreen',
-            'text-rotation': 'none',
-            'text-background-opacity': 1,
-            'text-background-padding': 1,
-            'text-background-shape': 'round-rectangle',
-            'text-background-color': 'white',
-          }
-        },
-        {
-          selector: 'edge.titul_play',
-          style: {
-            'line-color': 'royalblue',
-            'text-rotation': 'none',
-            'text-background-opacity': 1,
-            'text-background-padding': 1,
-            'text-background-shape': 'round-rectangle',
-            'text-background-color': 'white',
           }
         },
       ],
