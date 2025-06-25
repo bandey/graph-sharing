@@ -269,6 +269,14 @@
             'line-style': 'dashed',
           }
         },
+        {
+          selector: 'node.no-titul',
+          style: {
+            'background-fill': 'radial-gradient',
+            'background-gradient-stop-colors': 'white crimson',
+            'background-gradient-stop-positions': '30% 40%',
+          }
+        },
       ],
       {% if graph.layout %}
         layout: {name: '{{ graph.layout }}'},

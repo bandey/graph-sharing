@@ -23,6 +23,9 @@ def loadGraph(id):
       elem['label'] = elem['key'] + ' ' + elem['name']
     else:
       elem['label'] = elem['name']
+    tituls = elem.get('tituls')
+    if (tituls is not None) and (not tituls):
+      elem['class'].append('no-titul')
     vertices.append(elem)
     if 'bargain' in elem['class']:
       bargains.add(elem['key'])
