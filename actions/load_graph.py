@@ -55,6 +55,11 @@ def loadGraph(id):
         elem['class'].append('relate-distant')
     else:
       elem['label'] = elem['name']
+
+    style = elem.get('style')
+    if style:
+      elem['class'].append(style)
+
     edges.append(elem)
 
   g['vertices'] = vertices
