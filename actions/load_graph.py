@@ -37,7 +37,7 @@ def loadGraph(id):
       origins = elem.get('origins')
       if origins and (len(bargains.intersection(origins)) < 1):
         elem['label'] = '%s [%s]' % (elem['name'], ','.join(elem['origins']))
-        elem['class'].append('another-bargain')
+        elem['class'].append('dashed')
       else:
         elem['label'] = elem['name']
     elif (kind == 'person') or (kind == 'area') or (kind == 'socium'):
