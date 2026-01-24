@@ -12,6 +12,9 @@
       height: calc(100% - 2rem - 1px);
       border-top: 1px solid gray;
     }
+    #modal-dlg {
+      border-radius: 5px;
+    }
   </style>
   <script src="/static/cytoscape.min.js"></script>
   {% if mode == 'edit' %}
@@ -57,6 +60,12 @@
     </form>
   {% endif %}
 
+  <dialog id='modal-dlg'>
+    <center>Дополнительная информация:</center>
+    <p id='modal-msg'></p>
+    <form method='dialog'><center><button autofocus>закрыть</button></center></form>
+  </dialog>
+
   <div id="cy"></div>
 
   <script>
@@ -70,7 +79,7 @@
         nodes: [
           {% for vertex in graph.vertices %}
             {
-              data: {id: '{{ vertex.id }}', label: '{{ vertex.label }}'}, 
+              data: {id: '{{ vertex.id }}', label: "{{ vertex.label }}", info: "{{ vertex.info|safe }}"},
               classes: ['{{ vertex.class|join("','")|safe }}'],
               position: {x: {{ vertex.x or 0 }}, y: {{ vertex.y or 0 }}},
             },
@@ -79,7 +88,7 @@
         edges: [
           {% for edge in graph.edges %}
             {
-              data: {source: '{{ edge.source }}', target: '{{ edge.target }}', label: '{{ edge.label }}'},
+              data: {source: '{{ edge.source }}', target: '{{ edge.target }}', label: "{{ edge.label }}"},
               classes: ['{{ edge.class|join("','")|safe }}'],
             },
           {% endfor %}
@@ -286,10 +295,27 @@
             'background-gradient-stop-positions': '30% 40%',
           }
         },
+        {
+          selector: 'node.has-info',
+          style: {
+            'background-image': '/static/i-info.png',
+            'background-width': '50%',
+            'background-height': '50%',
+          }
+        },
       ],
       {% if graph.layout %}
         layout: {name: '{{ graph.layout }}'},
       {% endif %}
+    });
+
+    cy.on('touchend click', 'node', (event) => {
+      const node = event.target;
+      if (!node.data('info')) return;
+      const modalDlg = document.getElementById('modal-dlg');
+      const modalMsg = document.getElementById('modal-msg');
+      modalMsg.innerHTML = node.data('info');
+      modalDlg.showModal();
     });
 
     {% if not graph.layout %}
