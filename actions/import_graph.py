@@ -1,14 +1,21 @@
 import json
 from database.models import graph, vertex, edge
+from actions.delete_graph import deleteGraph
 
-def importGraph(file, name):
+def importGraph(file, name, optReplace):
   # check given graph name
   graphName = name.strip()
   if len(graphName) < 1:
     return 'Ошибка: Не указано имя графа'
+
   # check if graph with given name already exist
-  if graph.getOneByName(graphName):
-    return 'Ошибка: Граф с указанным названием уже есть'
+  g = graph.getOneByName(graphName)
+  graph_id = g.get('_id', '') if g else ''
+  if graph_id:
+    if optReplace:
+      deleteGraph(graph_id)
+    else:
+      return 'Ошибка: Граф с указанным названием уже есть'
 
   # go to begin of file
   file.seek(0)
@@ -28,8 +35,11 @@ def importGraph(file, name):
   root = data[0]
 
   # add new graph to database
-  graph_id = graph.insert({'name': graphName, 'kind': root.get('kind', ''), 
-    'layout': root.get('layout', '')})
+  graphBody = {'name': graphName, 'kind': root.get('kind', ''), 
+    'layout': root.get('layout', '')};
+  if graph_id:
+    graphBody['_id'] = graph_id
+  graph_id = graph.insert(graphBody)
 
   # loop all vertices
   for elem in root.get('vertices', []):

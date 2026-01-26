@@ -4,6 +4,10 @@
   <form id="dataForm" method="post" enctype="multipart/form-data">
     <p><input type="text" name="graphName" placeholder="название" required autofocus></p>
     <p><input type="file" id="dataFile" name="dataFile" accept=".json" required></p>
+    <p>
+      <input type="checkbox" id="optReplace" name="optReplace" >
+      <label for="optReplace">заменить существующий</label>
+    </p>
     <p><input type="submit" value="Отправить"></p>
   </form>
   {% with messages = get_flashed_messages() %}

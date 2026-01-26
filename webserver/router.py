@@ -42,7 +42,8 @@ def route_import():
   if (not file) or (not file.filename):
     flash('Не выбран файл для импорта')
     return render_template('import.html')
-  result = importGraph(file, request.form.get('graphName', ''))
+  optReplace = True if request.form.get('optReplace') else False
+  result = importGraph(file, request.form.get('graphName', ''), optReplace)
   flash(result)
   return render_template('result.html')
 
