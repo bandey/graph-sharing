@@ -12,9 +12,13 @@
       height: calc(100% - 2rem - 1px);
       border-top: 1px solid gray;
     }
-    #modal-dlg {
+    dialog {
+      display: none;
       border-radius: 5px;
     }
+    dialog[open] {
+      display: block;
+    }    
   </style>
   <script src="/static/cytoscape.min.js"></script>
   {% if mode == 'edit' %}
